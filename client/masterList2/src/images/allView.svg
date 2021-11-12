@@ -1,0 +1,14 @@
+<svg id="Component_7_1" data-name="Component 7 – 1" xmlns="http://www.w3.org/2000/svg" width="183" height="75" viewBox="0 0 183 75">
+  <g id="Rectangle_6" data-name="Rectangle 6" fill="rgba(255,255,255,0)" stroke="#fff" stroke-width="3">
+    <rect width="45" height="75" stroke="none"/>
+    <rect x="1.5" y="1.5" width="42" height="72" fill="none"/>
+  </g>
+  <g id="Rectangle_7" data-name="Rectangle 7" transform="translate(69)" fill="rgba(255,255,255,0)" stroke="#fff" stroke-width="3">
+    <rect width="45" height="75" stroke="none"/>
+    <rect x="1.5" y="1.5" width="42" height="72" fill="none"/>
+  </g>
+  <g id="Rectangle_8" data-name="Rectangle 8" transform="translate(138)" fill="rgba(255,255,255,0)" stroke="#fff" stroke-width="3">
+    <rect width="45" height="75" stroke="none"/>
+    <rect x="1.5" y="1.5" width="42" height="72" fill="none"/>
+  </g>
+</svg>
