@@ -9,11 +9,6 @@ const db = mysql.createConnection({
   database: "node",
 });
 
-// db.connect(function (err) {
-//   if (err) throw err;
-//   console.log("You are now connected...");
-// });
-
 app.get("/", (req, res) => {
   const sqlInsert =
     "INSERT INTO tabletable (name, username, password) VALUES ('Ziek', 'bruhdot777', '50519')";
