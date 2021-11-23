@@ -31,5 +31,4 @@ app.listen(3301, () => {
 //also had to create a new user in mysql adding one line at a time in Xammp
 //works now!
 
-
 //cat /etc/resolv.conf

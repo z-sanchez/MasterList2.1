@@ -23,7 +23,7 @@ class Task extends React.Component {
             this.handleNoHover(e);
           }}
         ></img>
-        <p className="task__description">Eat me</p>
+        <p className="task__description">Eat Ziek</p>
       </div>
     );
   }
