@@ -83,9 +83,9 @@ class Calendar extends React.Component {
         //grabs an entire week
         let renderNode = null;
 
-        if (firstRendered == false && nodeDates[dateCounter + 1] != 1) {
+        if (firstRendered == false && nodeDates[dateCounter + 1] != 1) { //if the first of month hasn't been reached and date doesn't equal first
           renderNode = (
-            <p className="calendarGrid__point calendarGrid__point-notCurrent">
+            <p className="calendarGrid__point calendarGrid__point-notCurrent" key={j}>
               {nodeDates[++dateCounter]}
             </p>
           );
@@ -93,21 +93,21 @@ class Calendar extends React.Component {
           nodeDates[dateCounter + 1] == 1 &&
           nodeDates[dateCounter + 1] == this.state.currentDay.date.day &&
           firstRendered == false
-        ) {
+        ) { //if date is 1st of a month and date is today's date and first hasn't been rendered
           renderNode = (
-            <p className="calendarGrid__point calendarGrid__point--currentDay">
+            <p className="calendarGrid__point calendarGrid__point--currentDay" key={j}>
               {nodeDates[++dateCounter]}
             </p>
           );
           firstRendered = true;
-        } else if (nodeDates[dateCounter + 1] == 1 && firstRendered == false) {
+        } else if (nodeDates[dateCounter + 1] == 1 && firstRendered == false) { //if date is 1st and first hasn't been rendered
           renderNode = (
-            <p className="calendarGrid__point">{nodeDates[++dateCounter]}</p>
+            <p className="calendarGrid__point" key={j}>{nodeDates[++dateCounter]}</p>
           );
           firstRendered = true;
-        } else if (nodeDates[dateCounter + 1] == 1 && firstRendered == true) {
+        } else if (nodeDates[dateCounter + 1] == 1 && firstRendered == true) { //if first of month comes up after first has already been rendered before
           renderNode = (
-            <p className="calendarGrid__point calendarGrid__point-notCurrent">
+            <p className="calendarGrid__point calendarGrid__point-notCurrent" key={j}>
               {nodeDates[++dateCounter]}
             </p>
           );
@@ -116,21 +116,21 @@ class Calendar extends React.Component {
           lastRendered == false &&
           firstRendered == true &&
           nodeDates[dateCounter + 1] == this.state.currentDay.date.day
-        ) {
+        ) { //if last of month hasn't been rendered, and the first of the month has been rendered, and it is the current day
           renderNode = (
-            <p className="calendarGrid__point calendarGrid__point--currentDay">
+            <p className="calendarGrid__point calendarGrid__point--currentDay" key={j}>
               {nodeDates[++dateCounter]}
             </p>
           );
-        } else if (lastRendered == false && firstRendered == true) {
+        } else if (lastRendered == false && firstRendered == true) { //if last of month hasn't been rendered and first has
           renderNode = (
-            <p className="calendarGrid__point calendarGrid__point">
+            <p className="calendarGrid__point" key={j}>
               {nodeDates[++dateCounter]}
             </p>
           );
-        } else if (lastRendered == true) {
+        } else if (lastRendered == true) { //if last has been rendered 
           renderNode = (
-            <p className="calendarGrid__point calendarGrid__point-notCurrent">
+            <p className="calendarGrid__point calendarGrid__point-notCurrent" key={j}>
               {nodeDates[++dateCounter]}
             </p>
           );
@@ -139,7 +139,7 @@ class Calendar extends React.Component {
         row[j] = renderNode;
       }
       newRows[i] = ( //moves gathered rows into newRows
-        <div className="calendarGrid__week">
+        <div className="calendarGrid__week" key={i}>
           {row.filter((e) => {
             return e;
           })}

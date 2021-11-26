@@ -6,6 +6,7 @@ import TaskDisplay from "./TaskDisplay";
 import { createYear } from "./createCalendar";
 import { findDayOfWeekday } from "../javascript/dateFormatting";
 import { DateContext } from "../javascript/context";
+import axios from "axios";
 
 class App extends React.Component {
   constructor(props) {
@@ -24,6 +25,18 @@ class App extends React.Component {
       currentDay: this.state.currentDay,
       year: this.state.years,
     };
+
+    axios //axios api post (takes url and object of data)
+      .post("http://localhost:3301/api/insert", {
+        nameOfUser: "cheese",
+        username: "cheese",
+        password: "cheese",
+      });
+
+    axios.get("http://localhost:3301/api/get").then((response) =>{ //retrives data from api
+      console.log(response.data);
+    });
+
     return (
       <div id="appWrapper">
         <Header />
