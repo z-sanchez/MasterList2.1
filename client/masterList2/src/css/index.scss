@@ -136,10 +136,14 @@ body {
 
 .viewSelector--on {
   /* setting dot to correct position */
-  position: absolute;
-  height: 0.8vh;
-  top: 18vh;
-  left: 17vw;
+  width: 0.5vw;
+  align-self: flex-end;
+  margin-right: 2vw;
+
+  // position: absolute;
+  // height: 0.8vh;
+  // top: 18vh;
+  // left: 17vw;
 }
 
 /* Calendar */
@@ -152,10 +156,9 @@ body {
 }
 
 #calendarHeader {
-  width: fit-content;
-  margin: 0 0 0 1vw;
-  padding: 0.3vh 1vw;
-  color: #dfdfdf;
+  display: flex;
+  flex-flow: row;
+  width: 18vw;
 }
 
 .calendarHeader--background {
@@ -165,6 +168,14 @@ body {
 
 #calendarHeader__date {
   font-size: 2vh;
+  margin: 0 2.5vw 0 1vw;
+  padding: 0.3vh 1vw;
+  color: #dfdfdf;
+}
+
+.calendarHeader__arrow {
+  width: 1.5vw;
+  margin-right: 0.8vw;
 }
 
 #calendarGrid {

@@ -1,6 +1,8 @@
 import React from "react";
 import { DateContext } from "../javascript/context";
 import { printHeaderDate, findFirstOfMonth } from "./dateFormatting";
+import calendarArrowUp from "../images/calendarArrowDown.svg";
+import calendarArrowDown from "../images/calendarArrowUp.svg";
 import "../css/index.css";
 
 class Calendar extends React.Component {
@@ -152,13 +154,15 @@ class Calendar extends React.Component {
   render() {
     return (
       <div id="calendar">
-        <div id="calendarHeader" className="calendarHeader--background">
-          <p id="calendarHeader__date">
+        <div id="calendarHeader">
+          <p id="calendarHeader__date" className="calendarHeader--background">
             {printHeaderDate(
               this.state.currentDay.date.month,
               this.state.currentDay.date.year
             )}
           </p>
+          <img className="calendarHeader__arrow" src={calendarArrowUp}></img>
+          <img className="calendarHeader__arrow" src={calendarArrowDown}></img>
         </div>
         <div id="calendarGrid">
           <div id="weekHeadings">

@@ -82,8 +82,6 @@ Build functioning calendar visual:
 - add event listener for jumping to date on task list
 
 Cosmestic changes:
-- Align logo
-- Add green marker as a flexbox child
 - Fix scrollbar
 
 Day View Selectors
@@ -92,8 +90,6 @@ Day View Selectors
 
 Add Task window:
 - Create a form for add task window
-- store task in database (mySQL)
-- probably need to implement node.js to create front end and back end stuff
 
 Weather and Time module:
 - Find APIs and makes code
