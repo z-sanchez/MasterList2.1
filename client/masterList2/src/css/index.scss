@@ -316,3 +316,86 @@ body {
   top: 88vh;
   width: 2.8vw;
 }
+
+
+/* add task form */
+.addTaskDisplayWrapper {
+  display: flex;
+  flex-flow: column;
+  position: fixed;
+  z-index: 11;
+  top: 35vh;
+  left: 28vw;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.addTaskDisplay {
+  display: flex;
+  flex-flow: column;
+  border-radius: 1vw;
+  width: 40vw;
+  height: 25vh;
+  box-shadow: 3px 5px 5px #11111144;
+  background-color: #2C3036;
+}
+
+.addTaskDisplay__title {
+  position: relative;
+  bottom: 5.5vh;
+  width: fit-content;
+  font-size: 3.5vh;
+  margin: 0 2.5vw 0 .5vw;
+  padding: 0.3vh 1vw;
+  color: #dfdfdf;
+  background-color: #fc5353;
+  border-radius: 8px;
+}
+
+.addTaskDisplay__formFlex {
+  display: flex;
+  flex-flow: column;
+  margin: 0 0 0 2vw;
+}
+
+.addTaskDisplay__formFlexField {
+  margin-bottom: 2vh;
+}
+
+.addTaskDisplay__formFlexField label {
+  color: #dfdfdf;
+  margin-right: 2vw;
+}
+
+.addTaskDisplay__formFlexField input[type="text"] {
+  background-color: #32373E;
+  color: #dfdfdf;
+  border: none;
+  height: 5vh;
+  width: 25vw;
+}
+
+.addTaskDisplay__formFlexField input[type="text"]:focus {
+  border: none;
+  color: #dfdfdf;
+}
+
+.addTaskDisplay__formFlexField select {
+  border: none;
+  background-color: #32373E;
+  color: #dfdfdf;
+  width: 4vw;
+  height: 5vh;
+  text-align: center;
+  margin-right: 1vw;
+}
+
+select option:hover {
+  background-color: #fc5353;
+}
+
+#yearInput {
+  text-align: center;
+  width: 3vw;
+}

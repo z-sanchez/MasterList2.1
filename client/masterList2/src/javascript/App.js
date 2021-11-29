@@ -63,7 +63,7 @@ function getCurrentDay() {
   };
 }
 
-//returns weekday number (ex. monday = 0)
+//returns weekday number (ex. monday = 1)
 function getWeekday() {
   const date = new Date();
   return date.getDay();

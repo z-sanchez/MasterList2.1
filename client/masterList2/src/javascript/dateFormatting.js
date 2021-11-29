@@ -14,13 +14,13 @@ const months = [
   "December",
 ];
 const weekDays = [
+  "Sunday",
   "Monday",
   "Tuesday",
   "Wednesday",
   "Thursday",
   "Friday",
   "Saturday",
-  "Sunday",
 ];
 
 //returns month name based off months array (monthNum is traditional numbering ie. Nov = 11)
@@ -30,7 +30,7 @@ function findMonthName(monthNum) {
 
 //returns day of the week name based of weekDays array (weekdayNum is traditional numbering ie. mon = 1)
 function findDayOfWeekday(weekdayNum) {
-  return weekDays[weekdayNum - 1];
+  return weekDays[weekdayNum];
 }
 
 //returns next week day name based off old name
@@ -44,7 +44,7 @@ function nextDayOfWeek(prevDayName) {
   }
 }
 
-//returns previous day of the week bassed of a given weekday name
+//returns previous day of the week based of a given weekday name
 function prevDayOfWeek(dayName) {
   dayName = dayName.charAt(0).toUpperCase() + dayName.slice(1);
   let locater = weekDays.indexOf(dayName);

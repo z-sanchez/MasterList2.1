@@ -20,6 +20,8 @@ class Calendar extends React.Component {
 
   componentDidMount() {
     let contextData = this.context;
+    console.log(contextData.currentDay.date);
+    console.log(contextData.currentDay.dayOfWeek);
     this.setState({
       currentDay: {
         date: contextData.currentDay.date,
