@@ -13,11 +13,18 @@ class TaskDisplay extends React.Component {
           </div>
           <div className="addTaskDisplay__formFlex">
             <div className="addTaskDisplay__formFlexField">
-              <label htmlFor="taskName">Task Name</label>
+              <label
+                className="addTaskDisplay__formFlexTaskName"
+                htmlFor="taskName"
+              >
+                Task Name
+              </label>
               <input type="text" name="taskName"></input>
             </div>
             <div className="addTaskDisplay__formFlexField">
-              <label htmlFor="date">Date</label>
+              <label className="addTaskDisplay__formFlexDate" htmlFor="date">
+                Date
+              </label>
               <select name="month">
                 <option value="1">JAN</option>
                 <option value="2">FEB</option>
@@ -65,7 +72,15 @@ class TaskDisplay extends React.Component {
                 <option value="30">30</option>
                 <option value="31">31</option>
               </select>
-              <input type="text" name="year" id="yearInput" value="YYYY"></input>
+              <input
+                type="text"
+                name="year"
+                id="yearInput"
+                placeholder="YYYY"
+              ></input>
+            </div>
+            <div className="addTaskDisplay__submitButton">
+              <p>ADD</p>
             </div>
           </div>
         </div>
