@@ -4,7 +4,27 @@ import TaskDisplayDay from "./TaskDisplayDay";
 import addButton from "../images/addButton.svg";
 
 class TaskDisplay extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      adding: false,
+    };
+  }
+
+  exitAddTask = () => {
+    this.setState({
+      adding: false,
+    });
+
+    document.querySelector(".clickAway").remove();
+  };
+
   renderAddTask() {
+    let clickAway = document.createElement("div");
+    clickAway.classList.add("clickAway");
+    clickAway.addEventListener("click", this.exitAddTask);
+    document.querySelector("body").appendChild(clickAway);
+
     return (
       <div className="addTaskDisplayWrapper">
         <div className="addTaskDisplay">
@@ -88,13 +108,23 @@ class TaskDisplay extends React.Component {
     );
   }
 
+  addTaskWindow() {
+    if (this.state.adding == true) return this.renderAddTask();
+    else return;
+  }
+
+  addTaskWindowTrue = () => {
+    this.setState({
+      adding: true,
+    })
+  }
   render() {
     return (
       <div id="taskDisplay">
-        {this.renderAddTask()}
+        {this.addTaskWindow()}
         <TaskDisplayDay />
         <div className="addButton">
-          <img id="add" alt="addButton" src={addButton}></img>
+          <img id="add" alt="addButton" onClick={this.addTaskWindowTrue} src={addButton}></img>
         </div>
       </div>
     );
