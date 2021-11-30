@@ -2,6 +2,7 @@ import React from "react";
 import "../css/index.css";
 import TaskDisplayDay from "./TaskDisplayDay";
 import addButton from "../images/addButton.svg";
+import { sendTaskToServer } from "./serverFunctions";
 
 class TaskDisplay extends React.Component {
   constructor(props) {
@@ -16,10 +17,13 @@ class TaskDisplay extends React.Component {
       adding: false,
     });
 
-    document.querySelector(".clickAway").remove();
+    while (document.querySelector(".clickAway") != undefined) {
+      document.querySelector(".clickAway").remove(); //why does this class appear twice
+    }
   };
 
   renderAddTask() {
+    //creates clickAway div and adds to body so user can click out of addtaskwindow
     let clickAway = document.createElement("div");
     clickAway.classList.add("clickAway");
     clickAway.addEventListener("click", this.exitAddTask);
@@ -39,13 +43,13 @@ class TaskDisplay extends React.Component {
               >
                 Task Name
               </label>
-              <input type="text" name="taskName"></input>
+              <input type="text" name="taskName" id="taskInput"></input>
             </div>
             <div className="addTaskDisplay__formFlexField">
               <label className="addTaskDisplay__formFlexDate" htmlFor="date">
                 Date
               </label>
-              <select name="month">
+              <select name="month" id="monthInput">
                 <option value="1">JAN</option>
                 <option value="2">FEB</option>
                 <option value="3">MAR</option>
@@ -59,7 +63,7 @@ class TaskDisplay extends React.Component {
                 <option value="11">NOV</option>
                 <option value="12">DEC</option>
               </select>
-              <select name="day">
+              <select name="day" id="dayInput">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -96,10 +100,14 @@ class TaskDisplay extends React.Component {
                 type="text"
                 name="year"
                 id="yearInput"
+                maxLength="4"
                 placeholder="YYYY"
               ></input>
             </div>
-            <div className="addTaskDisplay__submitButton">
+            <div
+              className="addTaskDisplay__submitButton"
+              onClick={this.handleSubmitTask}
+            >
               <p>ADD</p>
             </div>
           </div>
@@ -116,15 +124,41 @@ class TaskDisplay extends React.Component {
   addTaskWindowTrue = () => {
     this.setState({
       adding: true,
-    })
-  }
+    });
+  };
+
+  addTaskWindowFalse = () => {
+    this.setState({
+      adding: false,
+    });
+  };
+
+  handleSubmitTask = () => {
+    let task = null,
+      date = { month: null, day: null, year: null };
+
+    task = document.querySelector("#taskInput").value;
+    date.month = document.querySelector("#monthInput").value;
+    date.day = document.querySelector("#dayInput").value;
+    date.year = document.querySelector("#yearInput").value;
+
+    sendTaskToServer(task, date);
+
+    this.addTaskWindowFalse();
+  };
+
   render() {
     return (
       <div id="taskDisplay">
         {this.addTaskWindow()}
         <TaskDisplayDay />
         <div className="addButton">
-          <img id="add" alt="addButton" onClick={this.addTaskWindowTrue} src={addButton}></img>
+          <img
+            id="add"
+            alt="addButton"
+            onClick={this.addTaskWindowTrue}
+            src={addButton}
+          ></img>
         </div>
       </div>
     );

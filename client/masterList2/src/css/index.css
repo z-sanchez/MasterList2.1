@@ -373,9 +373,10 @@ body {
   width: 25vw;
 }
 
-.addTaskDisplay__formFlexField input[type=text]:focus {
+.addTaskDisplay__formFlexField input[type=text]:-webkit-autofill {
   border: none;
   color: #dfdfdf;
+  background-color: #32373e;
 }
 
 .addTaskDisplay__formFlexField select {
