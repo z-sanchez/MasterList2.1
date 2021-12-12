@@ -13,19 +13,19 @@ class Task extends React.Component {
   }
 
   render() {
-    return (
-      <div className="task">
-        <img
-          className="task__doneMarker--incomplete"
-          src={doneMarker}
-          onMouseEnter={(e) => this.handleHover(e)}
-          onMouseLeave={(e) => {
-            this.handleNoHover(e);
-          }}
-        ></img>
-        <p className="task__description">Feed Mimi and Ziek</p>
-      </div>
-    );
+    return (<div className="task">
+      <img
+        className="task__doneMarker--incomplete"
+        src={doneMarker}
+        onMouseEnter={(e) => this.handleHover(e)}
+        onMouseLeave={(e) => {
+          this.handleNoHover(e);
+        }}
+        alt={"task"}
+      />
+      {/* eslint-disable-next-line react/prop-types */}
+      <p className="task__description">{this.props.name}</p>
+    </div>);
   }
 }
 

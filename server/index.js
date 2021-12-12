@@ -18,7 +18,7 @@ const db = mysql.createConnection({
 
 app.get("/api/get", (req, res) => {
   //api route to reach api from to get
-  const sqlSelect = "SELECT * FROM tabletable";
+  const sqlSelect = "SELECT * FROM tasktable";
   db.query(sqlSelect, (err, results) => {
     //gets all data from table
     res.send(results); //sends to api

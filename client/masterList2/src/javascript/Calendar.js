@@ -161,8 +161,8 @@ class Calendar extends React.Component {
               this.state.currentDay.date.year
             )}
           </p>
-          <img className="calendarHeader__arrow" src={calendarArrowUp}></img>
-          <img className="calendarHeader__arrow" src={calendarArrowDown}></img>
+          <img className="calendarHeader__arrow" src={calendarArrowUp} alt={"arrowUp"}/>
+          <img className="calendarHeader__arrow" src={calendarArrowDown} alt={"arrowDown"}/>
         </div>
         <div id="calendarGrid">
           <div id="weekHeadings">

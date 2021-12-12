@@ -11,29 +11,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      years: [createYear(2021)],
-      currentDay: {
-        date: getCurrentDay(),
-        dayOfWeek: findDayOfWeekday(getWeekday()),
-      },
+      years: [createYear(2021)], currentDay: {
+        date: getCurrentDay(), dayOfWeek: findDayOfWeekday(getWeekday())
+      }
     };
   }
 
   render() {
     let contextData = {
-      currentDay: this.state.currentDay,
-      year: this.state.years,
+      currentDay: this.state.currentDay, year: this.state.years
     };
 
-    return (
-      <div id="appWrapper">
-        <Header />
-        <DateContext.Provider value={contextData}>
-          <Aside />
-        </DateContext.Provider>
-        <TaskDisplay />
-      </div>
-    );
+    return (<div id="appWrapper">
+      <Header />
+      <DateContext.Provider value={contextData}>
+        <Aside />
+      </DateContext.Provider>
+      <TaskDisplay />
+    </div>);
   }
 }
 
@@ -45,9 +40,7 @@ export default App;
 function getCurrentDay() {
   const date = new Date();
   return {
-    month: date.getMonth() + 1,
-    day: date.getDate(),
-    year: date.getFullYear(),
+    month: date.getMonth() + 1, day: date.getDate(), year: date.getFullYear()
   };
 }
 

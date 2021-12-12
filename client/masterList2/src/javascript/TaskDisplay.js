@@ -2,13 +2,15 @@ import React from "react";
 import "../css/index.css";
 import TaskDisplayDay from "./TaskDisplayDay";
 import addButton from "../images/addButton.svg";
-import { sendTaskToServer } from "./serverFunctions";
+import { getTasksFromServer, sendTaskToServer } from "./serverFunctions";
+
 
 class TaskDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       adding: false,
+      data: null,
     };
   }
 
@@ -102,7 +104,7 @@ class TaskDisplay extends React.Component {
                 id="yearInput"
                 maxLength="4"
                 placeholder="YYYY"
-              ></input>
+              />
             </div>
             <div
               className="addTaskDisplay__submitButton"
@@ -123,42 +125,76 @@ class TaskDisplay extends React.Component {
 
   addTaskWindowTrue = () => {
     this.setState({
-      adding: true,
+      adding: true
     });
   };
 
   addTaskWindowFalse = () => {
     this.setState({
-      adding: false,
+      adding: false
     });
   };
 
   handleSubmitTask = () => {
-    let task = null,
-      date = { month: null, day: null, year: null };
+    let task = {task: null, month: null, day: null, year: null};
 
-    task = document.querySelector("#taskInput").value;
-    date.month = document.querySelector("#monthInput").value;
-    date.day = document.querySelector("#dayInput").value;
-    date.year = document.querySelector("#yearInput").value;
+    task.task = document.querySelector("#taskInput").value;
+    task.month = document.querySelector("#monthInput").value;
+    task.day = document.querySelector("#dayInput").value;
+    task.year = document.querySelector("#yearInput").value;
 
-    sendTaskToServer(task, date);
+    sendTaskToServer(task);
+
+    this.addTask(task);
 
     this.addTaskWindowFalse();
   };
+
+  addTask = (taskObject) => {
+    let array = this.state.data;
+
+    
+    if (array == null) {
+      array = [taskObject];
+    }
+    else {
+      array.push(taskObject);
+
+    }
+
+    this.setState({
+      data: array,
+    });
+  }
+
+  componentDidMount() {
+    getTasksFromServer.then((response) => {
+      let data = response.data;
+      if (data.length === 0) {
+        throw "no data";
+      }
+      return data;
+    }).then((data) => {
+      this.setState({
+        data: data,
+      })
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 
   render() {
     return (
       <div id="taskDisplay">
         {this.addTaskWindow()}
-        <TaskDisplayDay />
+        <TaskDisplayDay data={this.state.data} />
         <div className="addButton">
           <img
             id="add"
             alt="addButton"
             onClick={this.addTaskWindowTrue}
             src={addButton}
-          ></img>
+          />
         </div>
       </div>
     );
