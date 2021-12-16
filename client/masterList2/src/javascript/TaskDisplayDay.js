@@ -7,27 +7,63 @@ class TaskDisplayDay extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      // eslint-disable-next-line react/prop-types
+      tasks: this.props.tasks,
+      // eslint-disable-next-line react/prop-types
+      date: this.props.date,
+    };
   }
 
 
   renderTask() {
+    let tasks = [null];
+    for (let i = 0; i < this.state.tasks.length; ++i) {
+      tasks[i] = (<Task name={this.state.tasks[i]} key={i + 1} />)
+    }
+
+    return tasks;
+
+  }
+
+  weekday() {
+    let dateString = "";
+    if (this.state.date.month.length === 1) {
+      dateString = dateString.concat("0");
+    }
+
+    dateString = dateString.concat(this.state.date.month + "/");
+
+    if (this.state.date.day.length === 1) {
+      dateString = dateString.concat("0");
+    }
+
+    dateString = dateString.concat(this.state.date.day + "/");
+    dateString = dateString.concat(this.state.date.year);
+
+    return new Date(dateString).toLocaleString('en-us', {weekday:'long'});
+  }
+
+  updateDays = () => {
     // eslint-disable-next-line react/prop-types
-    if (this.props.data != null) {
-    // eslint-disable-next-line react/prop-types
-      let nameOfTask = this.props.data[this.props.data.length - 1].task;
-      return (<Task name={nameOfTask} />)
+    if (this.state.tasks.length < this.props.tasks.length) {
+      this.setState({
+        // eslint-disable-next-line react/prop-types
+          tasks: this.props.tasks,
+      })
     }
   }
 
+  componentDidUpdate() {
+    this.updateDays();
+  }
 
   render() {
-    // eslint-disable-next-line react/prop-types
-
     return (
       <div className="taskDisplayDay">
         <div className="taskDisplayDay__nameDateContainer">
-          <p className="taskDisplayDay__day">Monday</p>
-          <p className="taskDisplayDay__date">10/4</p>
+          <p className="taskDisplayDay__day">{this.weekday()}</p>
+          <p className="taskDisplayDay__date">{this.state.date.month + "/" + this.state.date.day}</p>
         </div>
         <div className="taskDisplayDay__taskRow">
          {this.renderTask()}

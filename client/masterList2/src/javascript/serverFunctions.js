@@ -7,15 +7,6 @@ function sendTaskToServer(task) {
     });
 }
 
-// function getTasksFromServer() {
-//   return axios.get("http://localhost:3301/api/get");
-//
-//   // then((response) => {
-//   //   //retrives data from api
-//   //   return response.data;
-//   // });
-// }
-
 const getTasksFromServer = new Promise((resolve, reject) => {
 
   let response = axios.get("http://localhost:3301/api/get");
@@ -28,5 +19,20 @@ const getTasksFromServer = new Promise((resolve, reject) => {
   }
 });
 
-export { sendTaskToServer, getTasksFromServer };
+function closeAddTask(task) {
+   return new Promise ((resolve, reject) => {
+    if(task) {
+      sendTaskToServer(task);
+      resolve("task sent to Server");
+    }
+    else {
+      reject("Error: task not sent to server")
+    }
+  })
+}
+
+
+
+
+export { sendTaskToServer, getTasksFromServer, closeAddTask };
 
