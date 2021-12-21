@@ -18,9 +18,11 @@ class TaskDisplayDay extends React.Component {
 
   renderTask() {
     let tasks = [null];
+
     for (let i = 0; i < this.state.tasks.length; ++i) {
       tasks[i] = (<Task name={this.state.tasks[i]} key={i + 1} />)
     }
+
 
     return tasks;
 
@@ -46,10 +48,12 @@ class TaskDisplayDay extends React.Component {
 
   updateDays = () => {
     // eslint-disable-next-line react/prop-types
-    if (this.state.tasks.length < this.props.tasks.length) {
+    if (this.state.tasks.length < this.props.tasks.length || this.state.date !== this.props.date) {
       this.setState({
         // eslint-disable-next-line react/prop-types
           tasks: this.props.tasks,
+        // eslint-disable-next-line react/prop-types
+          date: this.props.date,
       })
     }
   }

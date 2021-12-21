@@ -20,9 +20,10 @@ class TaskDisplay extends React.Component {
       clickAway.addEventListener("click", this.exitAddTask);
       document.querySelector("body").appendChild(clickAway);
     }
-
-    while (document.querySelector(".clickAway") !== null) {
-      document.querySelector(".clickAway").remove(); //why does this class appear twice
+    else {
+      while (document.querySelector(".clickAway") !== null) {
+        document.querySelector(".clickAway").remove(); //why does this class appear twice
+      }
     }
 
     return null;
@@ -185,7 +186,7 @@ class TaskDisplay extends React.Component {
   }
 
   renderDays() {
-    let tasks = this.state.data, dayCodes = [null], iterator = 0, taskObjects = [null], days = [null];
+    let tasks = this.state.data, dayCodes = [],  taskObjects = [null], days = [null];
 
     if (tasks == null) return null;
 
@@ -194,16 +195,18 @@ class TaskDisplay extends React.Component {
       let newTaskObject = {dayCode: dayCode, taskData: task};
       taskObjects[index] = newTaskObject;
 
-      if (dayCodes.indexOf(dayCode) !== -1) {
-        return;
+      for (let i = 0; i < dayCodes.length; ++i) {
+        if (dayCode.getTime() === dayCodes[i].getTime()) {
+          return;
+        }
       }
 
-      dayCodes[iterator] = dayCode;
-      ++iterator;
+      dayCodes.push(dayCode);
     });
 
+
     dayCodes = dayCodes.slice().sort((a,b) => {
-        return b - a;
+        return a - b;
     });
 
 
@@ -217,11 +220,12 @@ class TaskDisplay extends React.Component {
 
     taskObjects.map((object) => {
       for (let i = 0; i < days.length; ++i) {
-        if (object.dayCode === days[i].dayCode) {
+        if (object.dayCode.getTime() === days[i].dayCode.getTime()) {
           days[i].taskDayComponent.push(object);
         }
       }
     });
+
 
     days.map((day, index) => {
       let tasks = [null],
