@@ -39,13 +39,26 @@ app.post("/api/insert", (req, res) => {
   });
 });
 
+app.post("/api/insertDeleted", (req, res) => {
+  const task = req.body.task; //grabs body data
+  const month = req.body.month;
+  const day = req.body.day;
+  const year = req.body.year;
+
+  const sqlInsert = //sql insert
+    "INSERT INTO deletedtasks (task, month, day, year) VALUES (?,?,?,?)";
+  db.query(sqlInsert, [task, month, day, year], (err, results) => {
+    console.log(results);
+  });
+});
+
 app.listen(3301, () => {
   //puts server at specific port
   console.log("running on port 3301");
 });
 
 db.connect(function (err) {
-  //verfies connection
+  //verifies connection
   if (err) throw err;
   console.log("You are now connected...");
 });

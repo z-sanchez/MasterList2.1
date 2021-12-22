@@ -9,9 +9,8 @@ class TaskDisplayDay extends React.Component {
     super(props);
     this.state = {
       // eslint-disable-next-line react/prop-types
-      tasks: this.props.tasks,
-      // eslint-disable-next-line react/prop-types
-      date: this.props.date,
+      tasks: this.props.tasks, // eslint-disable-next-line react/prop-types
+      date: this.props.date
     };
   }
 
@@ -20,12 +19,10 @@ class TaskDisplayDay extends React.Component {
     let tasks = [null];
 
     for (let i = 0; i < this.state.tasks.length; ++i) {
-      tasks[i] = (<Task name={this.state.tasks[i]} key={i + 1} />)
+      tasks[i] = (<Task name={this.state.tasks[i]} date={this.state.date} key={i + 1} />);
     }
 
-
     return tasks;
-
   }
 
   weekday() {
@@ -43,7 +40,7 @@ class TaskDisplayDay extends React.Component {
     dateString = dateString.concat(this.state.date.day + "/");
     dateString = dateString.concat(this.state.date.year);
 
-    return new Date(dateString).toLocaleString('en-us', {weekday:'long'});
+    return new Date(dateString).toLocaleString("en-us", { weekday: "long" });
   }
 
   updateDays = () => {
@@ -51,29 +48,27 @@ class TaskDisplayDay extends React.Component {
     if (this.state.tasks.length < this.props.tasks.length || this.state.date !== this.props.date) {
       this.setState({
         // eslint-disable-next-line react/prop-types
-          tasks: this.props.tasks,
-        // eslint-disable-next-line react/prop-types
-          date: this.props.date,
-      })
+        tasks: this.props.tasks, // eslint-disable-next-line react/prop-types
+        date: this.props.date
+      });
     }
-  }
+  };
 
   componentDidUpdate() {
     this.updateDays();
   }
 
   render() {
-    return (
-      <div className="taskDisplayDay">
-        <div className="taskDisplayDay__nameDateContainer">
-          <p className="taskDisplayDay__day">{this.weekday()}</p>
-          <p className="taskDisplayDay__date">{this.state.date.month + "/" + this.state.date.day}</p>
-        </div>
-        <div className="taskDisplayDay__taskRow">
-         {this.renderTask()}
-        </div>
+    return (<div className="taskDisplayDay">
+      <div className="taskDisplayDay__nameDateContainer">
+        <p className="taskDisplayDay__day">{this.weekday()}</p>
+        <p
+          className="taskDisplayDay__date">{this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}</p>
       </div>
-    );
+      <div className="taskDisplayDay__taskRow">
+        {this.renderTask()}
+      </div>
+    </div>);
   }
 }
 

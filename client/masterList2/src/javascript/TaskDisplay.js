@@ -2,7 +2,7 @@ import React from "react";
 import "../css/index.css";
 import TaskDisplayDay from "./TaskDisplayDay";
 import addButton from "../images/addButton.svg";
-import { getTasksFromServer, closeAddTask } from "./serverFunctions";
+import { closeAddTask, getTasksFromServer } from "./serverFunctions";
 
 
 class TaskDisplay extends React.Component {
@@ -192,8 +192,7 @@ class TaskDisplay extends React.Component {
 
     tasks.map((task, index) => { //creates dayCodes for days to match to and creates objects for sorting
       let dayCode = new Date (task.month + "-" + task.day + "-" + task.year);
-      let newTaskObject = {dayCode: dayCode, taskData: task};
-      taskObjects[index] = newTaskObject;
+      taskObjects[index] = { dayCode: dayCode, taskData: task };
 
       for (let i = 0; i < dayCodes.length; ++i) {
         if (dayCode.getTime() === dayCodes[i].getTime()) {

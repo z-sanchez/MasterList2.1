@@ -1,14 +1,6 @@
 import axios from "axios";
 
-function sendTaskToServer(task) {
-  axios //axios api post (takes url and object of data)
-    .post("http://localhost:3301/api/insert", {
-      task: task.task, month: task.month, day: task.day, year: task.year
-    });
-}
-
 const getTasksFromServer = new Promise((resolve, reject) => {
-
   let response = axios.get("http://localhost:3301/api/get");
 
   if (response.data === 0) {
@@ -31,8 +23,21 @@ function closeAddTask(task) {
   })
 }
 
+function sendTaskToServer(task) {
+  axios //axios api post (takes url and object of data)
+    .post("http://localhost:3301/api/insert", {
+      task: task.task, month: task.month, day: task.day, year: task.year
+    });
+}
+
+function sendTaskToServerDeleted(task) {
+  axios //axios api post (takes url and object of data)
+    .post("http://localhost:3301/api/insertDeleted", {
+      task: task.task, month: task.month, day: task.day, year: task.year
+    });
+}
 
 
 
-export { sendTaskToServer, getTasksFromServer, closeAddTask };
+export { sendTaskToServer, getTasksFromServer, closeAddTask, sendTaskToServerDeleted };
 

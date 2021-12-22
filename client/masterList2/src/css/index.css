@@ -29,11 +29,10 @@ body {
   display: grid;
   width: 100vw;
   height: 100vh;
-  grid-template-columns: 20% auto 0px;
+  grid-template-columns: 20% auto 0;
   grid-template-rows: 15% auto;
   column-gap: 20px;
   background-color: #32373e;
-  /* entire app's background */
 }
 
 #header {
@@ -78,9 +77,7 @@ body {
 
 #logo {
   max-width: 100%;
-  /* width gets no longer than 100% when changing */
   height: 100%;
-  /* height can adjust to whatever to prevent warping */
   align-self: center;
 }
 
@@ -244,7 +241,7 @@ body {
   display: flex;
   flex-flow: column;
   height: fit-content;
-  margin: 2vh 0 0 0;
+  margin: 2vh 0 2vh 0;
 }
 
 .taskDisplayDay__nameDateContainer {
