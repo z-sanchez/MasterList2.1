@@ -8,7 +8,7 @@ class Header extends React.Component {
       <header id="header">
         <div id="headerFlex">
           <img src={logo} id="logo"></img>
-          <p id="timeDisplay">8:20pm</p>
+          <p id="timeDisplay">8:21pm</p>
         </div>
       </header>
     );

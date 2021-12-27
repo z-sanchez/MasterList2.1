@@ -8,9 +8,6 @@ class Task extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      showTask: true
-    };
   }
 
   handleHover(image) {
@@ -33,13 +30,11 @@ class Task extends React.Component {
       year: this.props.date.year
     };
     sendTaskToServerDeleted(task);
-    this.setState({
-      showTask: false
-    });
+    // eslint-disable-next-line react/prop-types
+    this.props.taskDeleted(task);
   };
 
   render() {
-    if (this.state.showTask === true) {
       return (<div className="task">
         <img
           className="task__doneMarker--incomplete"
@@ -54,9 +49,6 @@ class Task extends React.Component {
         {/* eslint-disable-next-line react/prop-types */}
         <p className="task__description">{this.props.name}</p>
       </div>);
-    } else {
-      return null;
-    }
   }
 }
 

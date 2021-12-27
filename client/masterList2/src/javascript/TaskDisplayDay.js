@@ -7,6 +7,7 @@ class TaskDisplayDay extends React.Component {
 
   constructor(props) {
     super(props);
+    this.taskDeleted = this.taskDeleted.bind(this);
     this.state = {
       // eslint-disable-next-line react/prop-types
       tasks: this.props.tasks, // eslint-disable-next-line react/prop-types
@@ -14,12 +15,17 @@ class TaskDisplayDay extends React.Component {
     };
   }
 
+  taskDeleted = (task) => {
+    // eslint-disable-next-line react/prop-types
+    this.props.updateTasks(task);
+  }
+
 
   renderTask() {
     let tasks = [null];
 
     for (let i = 0; i < this.state.tasks.length; ++i) {
-      tasks[i] = (<Task name={this.state.tasks[i]} date={this.state.date} key={i + 1} />);
+      tasks[i] = (<Task name={this.state.tasks[i]} date={this.state.date} taskDeleted={this.taskDeleted} key={i + 1} />);
     }
 
     return tasks;

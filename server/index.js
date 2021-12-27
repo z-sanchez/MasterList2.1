@@ -50,6 +50,11 @@ app.post("/api/insertDeleted", (req, res) => {
   db.query(sqlInsert, [task, month, day, year], (err, results) => {
     console.log(results);
   });
+  const sqlDelete =
+    "DELETE FROM tasktable WHERE task=(?)";
+  db.query(sqlDelete, [task], (err, results) => {
+    console.log(results);
+  })
 });
 
 app.listen(3301, () => {

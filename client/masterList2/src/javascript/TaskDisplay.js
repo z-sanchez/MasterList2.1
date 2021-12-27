@@ -8,6 +8,7 @@ import { closeAddTask, getTasksFromServer } from "./serverFunctions";
 class TaskDisplay extends React.Component {
   constructor(props) {
     super(props);
+    this.updateTasks = this.updateTasks.bind(this);
     this.state = {
       adding: false, data: null
     };
@@ -186,7 +187,7 @@ class TaskDisplay extends React.Component {
   }
 
   renderDays() {
-    let tasks = this.state.data, dayCodes = [],  taskObjects = [null], days = [null];
+    let tasks = this.state.data, dayCodes = [],  taskObjects = [null], days = [];
 
     if (tasks == null) return null;
 
@@ -240,11 +241,26 @@ class TaskDisplay extends React.Component {
         year: day.taskDayComponent[0].taskData.year,
       }
 
-      days[index] = (<TaskDisplayDay date={date} tasks={tasks} key={index}/>);
+      days[index] = (<TaskDisplayDay updateTasks={this.updateTasks} date={date} tasks={tasks} key={index}/>);
     });
 
 
     return days;
+  }
+  
+  updateTasks = (task) => {
+    var tasks = this.state.data
+
+    for (let i = 0; i < tasks.length; ++i) {
+      if (tasks[i].task === task.task) { //on updates after deletes, only matches names not instance of object
+        tasks.splice(i, 1);
+        break;
+      }
+    }
+
+    this.setState({
+      data: tasks,
+    });
   }
 
   render() {
@@ -265,3 +281,14 @@ class TaskDisplay extends React.Component {
 }
 
 export default TaskDisplay;
+
+
+//WHat if?
+/*
+1. Get all tasks from database (once on taskDisplay mount)
+2. Organize tasks into days and save into state (once on taskDisplay mount)
+3. Add button adds new day and task to state
+4. Each day is rendered (find day, add task data, else create new day) (rendering ???)
+
+
+ */

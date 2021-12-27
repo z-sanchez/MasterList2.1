@@ -60,7 +60,7 @@ function createDays(month) {
         taskArray: [null],
         finishedTasks: [null],
         prevDay: null,
-        nextDay: null,
+        nextDay: null
       };
       day.date = { month: month[i].month, day: j + 1, year: month[i].year };
       if (prevDay != null) {
