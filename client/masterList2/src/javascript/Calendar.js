@@ -1,6 +1,5 @@
 import React from "react";
 import { DateContext } from "../javascript/context";
-import { printHeaderDate, findFirstOfMonth } from "./dateFormatting";
 import calendarArrowUp from "../images/calendarArrowDown.svg";
 import calendarArrowDown from "../images/calendarArrowUp.svg";
 import "../css/index.css";
@@ -10,144 +9,55 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentDay: {
-        date: { month: "Month", day: 0, year: 0 },
-        dayOfWeek: "weekday",
-      },
-      years: [null],
+        dateObject: new Date(),
     };
   }
 
   componentDidMount() {
-    let contextData = this.context;
+    //let contextData = this.context; //grab context data with this line
+    const date = new Date();
     this.setState({
-      currentDay: {
-        date: contextData.currentDay.date,
-        dayOfWeek: contextData.currentDay.dayOfWeek,
-      },
-      years: contextData.year,
+        dateObject: date,
     });
   }
 
+  getMonthName() {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    return monthNames[this.state.dateObject.getMonth()];
+  }
+
   fillCalendar() {
-    let newRows = [null], //where rows to be rendered will be stored
-      weekdays = [
-        //used for finding how many days before day one of month need to be rendered
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      startOfMonth = findFirstOfMonth(
-        this.state.currentDay.dayOfWeek,
-        this.state.currentDay.date.day
-      ), //sets the weekday name for the start of the month
-      nodeDates = [], //this array will carry the values to be shown on each calendar node
-      prevDateNode = null,
-      nextDateNode = null,
-      dateCounter = -1;
+    let newRows = [],
+      currentDate = this.state.dateObject,
+      lastOfPrevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() , 0 ).getDate(),
+      lastOfCurrentMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate(),
+      weekDayOfFirst = new Date(currentDate.getFullYear(), currentDate.getMonth()  , 1 );
 
-    let daysBeforeMonth = weekdays.indexOf(startOfMonth); //finds days before month starts that need to be rendered
-    let startOfMonthNode = getDateNode(
-      this.state.years[0],
-      this.state.currentDay.date.month - 1,
-      0
-    ); //returns actual date node
-
-    prevDateNode = startOfMonthNode;
-
-    //loops through days before 1st of month to find their day values
-    for (let i = 0; i < daysBeforeMonth; ++i) {
-      nodeDates[i] = prevDateNode.prevDay.date.day;
-      prevDateNode = prevDateNode.prevDay;
+    for (let i = 0; i < weekDayOfFirst.getDay() - 1; i++) {
+      newRows[i] = (<p className="calendarGrid__point calendarGrid__point-notCurrent" key={i}>{lastOfPrevMonth -= 1}</p>);
     }
+    newRows = newRows.reverse();
 
-    nodeDates = nodeDates.reverse(); //reverses nodeDates so dates gathered so far read in correct order
-    nextDateNode = startOfMonthNode;
+    for (let i = 0; i <= lastOfCurrentMonth - 1; i++) {
+      let newNode = null;
 
-    //finds all the next days day values
-    for (let i = nodeDates.length; i < 42; ++i) {
-      if (nextDateNode == undefined) break;
-      nodeDates[i] = nextDateNode.date.day;
-      nextDateNode = nextDateNode.nextDay;
-    }
-
-    let firstRendered = false,
-      lastRendered = false;
-
-    //loops to gather 6 calendar rows
-    for (let i = 0; i < 6; ++i) {
-      let row = [null];
-      for (let j = 0; j < 7; ++j) {
-        //grabs an entire week
-        let renderNode = null;
-
-        if (firstRendered == false && nodeDates[dateCounter + 1] != 1) { //if the first of month hasn't been reached and date doesn't equal first
-          renderNode = (
-            <p className="calendarGrid__point calendarGrid__point-notCurrent" key={j}>
-              {nodeDates[++dateCounter]}
-            </p>
-          );
-        } else if (
-          nodeDates[dateCounter + 1] == 1 &&
-          nodeDates[dateCounter + 1] == this.state.currentDay.date.day &&
-          firstRendered == false
-        ) { //if date is 1st of a month and date is today's date and first hasn't been rendered
-          renderNode = (
-            <p className="calendarGrid__point calendarGrid__point--currentDay" key={j}>
-              {nodeDates[++dateCounter]}
-            </p>
-          );
-          firstRendered = true;
-        } else if (nodeDates[dateCounter + 1] == 1 && firstRendered == false) { //if date is 1st and first hasn't been rendered
-          renderNode = (
-            <p className="calendarGrid__point" key={j}>{nodeDates[++dateCounter]}</p>
-          );
-          firstRendered = true;
-        } else if (nodeDates[dateCounter + 1] == 1 && firstRendered == true) { //if first of month comes up after first has already been rendered before
-          renderNode = (
-            <p className="calendarGrid__point calendarGrid__point-notCurrent" key={j}>
-              {nodeDates[++dateCounter]}
-            </p>
-          );
-          lastRendered = true;
-        } else if (
-          lastRendered == false &&
-          firstRendered == true &&
-          nodeDates[dateCounter + 1] == this.state.currentDay.date.day
-        ) { //if last of month hasn't been rendered, and the first of the month has been rendered, and it is the current day
-          renderNode = (
-            <p className="calendarGrid__point calendarGrid__point--currentDay" key={j}>
-              {nodeDates[++dateCounter]}
-            </p>
-          );
-        } else if (lastRendered == false && firstRendered == true) { //if last of month hasn't been rendered and first has
-          renderNode = (
-            <p className="calendarGrid__point" key={j}>
-              {nodeDates[++dateCounter]}
-            </p>
-          );
-        } else if (lastRendered == true) { //if last has been rendered 
-          renderNode = (
-            <p className="calendarGrid__point calendarGrid__point-notCurrent" key={j}>
-              {nodeDates[++dateCounter]}
-            </p>
-          );
-        }
-
-        row[j] = renderNode;
+      if (i === currentDate.getDate()) {
+        newNode = (<p className="calendarGrid__point calendarGrid__point--currentDay" key={i + 55}>{i + 1}</p>)
       }
-      newRows[i] = ( //moves gathered rows into newRows
-        <div className="calendarGrid__week" key={i}>
-          {row.filter((e) => {
-            return e;
-          })}
-        </div>
-      );
+      else {
+        newNode = (<p className="calendarGrid__point" key={i + 55}>{i + 1}</p>)
+      }
+      newRows.push(newNode);
     }
+
+    for (let i = 0; newRows.length < 35; i++) {
+      let newNode = (<p className="calendarGrid__point calendarGrid__point-notCurrent" key={i + 110}>{i + 1}</p>)
+      newRows.push(newNode);
+    }
+
     return newRows;
   }
 
@@ -156,16 +66,12 @@ class Calendar extends React.Component {
       <div id="calendar">
         <div id="calendarHeader">
           <p id="calendarHeader__date" className="calendarHeader--background">
-            {printHeaderDate(
-              this.state.currentDay.date.month,
-              this.state.currentDay.date.year
-            )}
+            {this.getMonthName()}
           </p>
           <img className="calendarHeader__arrow" src={calendarArrowUp} alt={"arrowUp"}/>
           <img className="calendarHeader__arrow" src={calendarArrowDown} alt={"arrowDown"}/>
         </div>
         <div id="calendarGrid">
-          <div id="weekHeadings">
             <p
               className="calendarGrid__point calendarGrid__point--weekHeading"
               id="monday"
@@ -208,7 +114,6 @@ class Calendar extends React.Component {
             >
               S
             </p>
-          </div>
           {this.fillCalendar()}
         </div>
       </div>
@@ -218,8 +123,3 @@ class Calendar extends React.Component {
 
 export default Calendar;
 
-function getDateNode(yearArray, month, day) {
-  if (yearArray == null) return;
-  let node = yearArray.monthArray[month].dayArray[day];
-  return node;
-}

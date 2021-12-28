@@ -181,35 +181,25 @@ body
 
 
 #calendarGrid
-  display: grid
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+  display: flex
+  flex-flow: row
+  flex-wrap: wrap
   height: 85%
+  width: 100%
   background-color: #32373e
   border-radius: 8px
 
 
 .calendarGrid__point
-  width: 0.8vw
+  width: calc(100%/7)
   height: fit-content
-  padding: 0.1vh 0.5vw
-  margin: 0 0.2vw 0 0.2vw
   font-size: 1.8vh
   color: #ffffff
   text-align: center
 
-
 .calendarGrid__point:hover
   background-color: #fc53539f
   border-radius: 500px
-
-
-.calendarGrid__week
-  display: flex
-  justify-content: center
-  width: 95%
-  height: fit-content
-  justify-self: center
-
 
 .calendarGrid__point--currentDay
   background-color: #fc5353
@@ -218,16 +208,6 @@ body
 
 .calendarGrid__point-notCurrent
   color: #495058
-
-
-#weekHeadings
-  display: flex
-  justify-content: center
-  width: 95%
-  height: fit-content
-  justify-self: center
-  margin: 1vh 0 0 0
-  padding-bottom: 1vh
 
 
 .calendarGrid__point--weekHeading
