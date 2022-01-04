@@ -34,13 +34,13 @@ class Calendar extends React.Component {
     let newRows = [],
       today = new Date(),
       currentDate = current,
-      lastOfPrevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate(),
+      lastOfPrevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate() + 1,
       lastOfCurrentMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate(),
       weekDayOfFirst = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 
     for (let i = 0; i < weekDayOfFirst.getDay() - 1; i++) {
       newRows[i] = (
-        <p className="calendarGrid__point calendarGrid__point-notCurrent" key={i}>{lastOfPrevMonth -= 1}</p>);
+        <p className="calendarGrid__point calendarGrid__point-notCurrent" onClick={() => this.handleCalendarClick(i+1)} key={i}>{--lastOfPrevMonth}</p>);
     }
     newRows = newRows.reverse();
 
@@ -48,19 +48,23 @@ class Calendar extends React.Component {
       let newNode = null;
 
       if (i === today.getDate() - 1 && currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear()) {
-        newNode = (<p className="calendarGrid__point calendarGrid__point--currentDay" key={i + 55}>{i + 1}</p>);
+        newNode = (<p className="calendarGrid__point calendarGrid__point--currentDay" onClick={() => this.handleCalendarClick(i+1)} key={i + 55}>{i + 1}</p>);
       } else {
-        newNode = (<p className="calendarGrid__point" key={i + 55}>{i + 1}</p>);
+        newNode = (<p className="calendarGrid__point" onClick={() => this.handleCalendarClick(i+1)} key={i + 55}>{i + 1} </p>);
       }
       newRows.push(newNode);
     }
 
     for (let i = 0; newRows.length < 35; i++) {
-      let newNode = (<p className="calendarGrid__point calendarGrid__point-notCurrent" key={i + 110}>{i + 1}</p>);
+      let newNode = (<p className="calendarGrid__point calendarGrid__point-notCurrent" onClick={() => this.handleCalendarClick(i+1)} key={i + 110}>{i + 1}</p>);
       newRows.push(newNode);
     }
 
     return newRows;
+  }
+
+  handleCalendarClick(date) {
+    console.log(this.state.dateObject.getMonth(), date, this.state.dateObject.getFullYear());
   }
 
   previousMonth = () => {
