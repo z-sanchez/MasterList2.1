@@ -149,6 +149,7 @@ body {
 
 #calendarHeader {
   display: flex;
+  justify-content: space-between;
   flex-flow: row;
   width: 18vw;
 }
@@ -163,6 +164,10 @@ body {
   margin: 0 2.5vw 0 1vw;
   padding: 0.3vh 1vw;
   color: #dfdfdf;
+}
+
+#calendarHeader__arrow--flex {
+  align-self: flex-end;
 }
 
 .calendarHeader__arrow {
