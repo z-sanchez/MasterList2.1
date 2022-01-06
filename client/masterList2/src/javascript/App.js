@@ -2,7 +2,7 @@ import React from "react";
 import "../css/index.css";
 import Header from "./Header";
 import Aside from "./Aside";
-import TaskDisplay from "./TaskDisplay";
+import ScrollBar from "./ScrollBar";
 import { createYear } from "./createCalendar";
 import { findDayOfWeekday } from "../javascript/dateFormatting";
 import { DateContext } from "../javascript/context";
@@ -27,7 +27,7 @@ class App extends React.Component {
       <DateContext.Provider value={contextData}>
         <Aside />
       </DateContext.Provider>
-      <TaskDisplay />
+      <ScrollBar/>
     </div>);
   }
 }

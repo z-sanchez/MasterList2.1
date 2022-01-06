@@ -35,7 +35,8 @@ class Task extends React.Component {
   };
 
   render() {
-      return (<div className="task">
+    // eslint-disable-next-line react/prop-types
+      return (<div className="task" id={this.props.name.replace(/\s/g, '')}>
         <img
           className="task__doneMarker--incomplete"
           src={doneMarker}

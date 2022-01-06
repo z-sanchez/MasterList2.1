@@ -65,7 +65,7 @@ class TaskDisplayDay extends React.Component {
   }
 
   render() {
-    return (<div className="taskDisplayDay">
+    return (<div className="taskDisplayDay" id={this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}>
       <div className="taskDisplayDay__nameDateContainer">
         <p className="taskDisplayDay__day">{this.weekday()}</p>
         <p
