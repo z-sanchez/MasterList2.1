@@ -3,8 +3,10 @@ import "../css/index.css";
 import doneMarker from "../images/doneMarker.svg";
 import doneMarkerComplete from "../images/doneMarkerComplete.svg";
 import { sendTaskToServerDeleted } from "./serverFunctions";
+import { DateContext } from "../javascript/context";
 
 class Task extends React.Component {
+  static contextType = DateContext;
 
   constructor(props) {
     super(props);
@@ -36,6 +38,8 @@ class Task extends React.Component {
 
   render() {
     // eslint-disable-next-line react/prop-types
+    if (this.context.viewMode === "oneDay") {
+      // eslint-disable-next-line react/prop-types
       return (<div className="task" id={this.props.name.replace(/\s/g, '')}>
         <img
           className="task__doneMarker--incomplete"
@@ -50,6 +54,24 @@ class Task extends React.Component {
         {/* eslint-disable-next-line react/prop-types */}
         <p className="task__description">{this.props.name}</p>
       </div>);
+    }
+    else {
+      // eslint-disable-next-line react/prop-types
+      return (<div className="task--all" id={this.props.name.replace(/\s/g, '')}>
+        <img
+          className="task__doneMarker--incomplete"
+          src={doneMarker}
+          onMouseEnter={(e) => this.handleHover(e)}
+          onMouseLeave={(e) => {
+            this.handleNoHover(e);
+          }}
+          onClick={this.deleteTask}
+          alt={"task"}
+        />
+        {/* eslint-disable-next-line react/prop-types */}
+        <p className="task__description--all">{this.props.name}</p>
+      </div>);
+    }
   }
 }
 

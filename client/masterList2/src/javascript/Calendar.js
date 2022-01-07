@@ -70,7 +70,8 @@ class Calendar extends React.Component {
 
   handleCalendarClick(date) {
     let target = (this.state.dateObject.getMonth() + 1) + "/" + date + "/" + this.state.dateObject.getFullYear();
-    document.getElementById(target).scrollIntoView({behavior: 'smooth'});
+    let element = document.getElementById(target);
+    if (element !== null) element.scrollIntoView({behavior: 'smooth'});
   }
 
   previousMonth = () => {

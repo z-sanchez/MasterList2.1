@@ -1,9 +1,11 @@
 import React from "react";
 import "../css/index.css";
 import Task from "./Task";
-
+import { DateContext } from "../javascript/context";
 
 class TaskDisplayDay extends React.Component {
+
+  static contextType = DateContext;
 
   constructor(props) {
     super(props);
@@ -11,7 +13,7 @@ class TaskDisplayDay extends React.Component {
     this.state = {
       // eslint-disable-next-line react/prop-types
       tasks: this.props.tasks, // eslint-disable-next-line react/prop-types
-      date: this.props.date
+      date: this.props.date,
     };
   }
 
@@ -65,16 +67,33 @@ class TaskDisplayDay extends React.Component {
   }
 
   render() {
-    return (<div className="taskDisplayDay" id={this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}>
-      <div className="taskDisplayDay__nameDateContainer">
-        <p className="taskDisplayDay__day">{this.weekday()}</p>
-        <p
-          className="taskDisplayDay__date">{this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}</p>
-      </div>
-      <div className="taskDisplayDay__taskRow">
-        {this.renderTask()}
-      </div>
-    </div>);
+    // eslint-disable-next-line react/prop-types
+    if (this.context.viewMode === "oneDay") {
+      return (<div className="taskDisplayDay"
+                   id={this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}>
+        <div className="taskDisplayDay__nameDateContainer">
+          <p className="taskDisplayDay__day">{this.weekday()}</p>
+          <p
+            className="taskDisplayDay__date">{this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}</p>
+        </div>
+        <div className="taskDisplayDay__taskRow">
+          {this.renderTask()}
+        </div>
+      </div>);
+    }
+    else {
+      return (<div className="taskDisplayDay--all"
+                   id={this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}>
+        <div className="taskDisplayDay__nameDateContainer--all">
+          <p className="taskDisplayDay__day--all">{this.weekday()}</p>
+          <p
+            className="taskDisplayDay__date--all">{this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}</p>
+        </div>
+        <div className="taskDisplayDay__taskRow--all">
+          {this.renderTask()}
+        </div>
+      </div>);
+    }
   }
 }
 

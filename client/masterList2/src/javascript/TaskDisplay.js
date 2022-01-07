@@ -5,12 +5,14 @@ import addButton from "../images/addButton.svg";
 import { closeAddTask, getTasksFromServer } from "./serverFunctions";
 
 
+
 class TaskDisplay extends React.Component {
+
   constructor(props) {
     super(props);
     this.updateTasks = this.updateTasks.bind(this);
     this.state = {
-      adding: false, data: null
+      adding: false, data: null,
     };
   }
 
@@ -170,6 +172,7 @@ class TaskDisplay extends React.Component {
     });
   };
 
+
   componentDidMount() { //when component mounts, fetch all relevant data so you don't fetch every update
     getTasksFromServer.then((response) => {
       let data = response.data;
@@ -179,7 +182,7 @@ class TaskDisplay extends React.Component {
       return data;
     }).then((data) => {
       this.setState({
-        data: data
+        data: data,
       });
     }).catch((err) => {
       console.log(err);
