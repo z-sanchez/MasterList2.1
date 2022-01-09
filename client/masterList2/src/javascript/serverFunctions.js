@@ -11,6 +11,18 @@ const getTasksFromServer = new Promise((resolve, reject) => {
   }
 });
 
+const getFinishedTasksFromServer = new Promise((resolve, reject) => {
+  let response = axios.get("http://localhost:3301/api/getFinished");
+
+  if (response.data === 0) {
+    reject("no data");
+  }
+  else {
+    resolve(response);
+  }
+});
+
+
 function closeAddTask(task) {
    return new Promise ((resolve, reject) => {
     if(task) {
@@ -30,6 +42,13 @@ function sendTaskToServer(task) {
     });
 }
 
+function removeTaskFromDeleted(task) {
+  axios //axios api post (takes url and object of data)
+    .post("http://localhost:3301/api/remove", {
+      task: task.task, month: task.month, day: task.day, year: task.year
+    });
+}
+
 function sendTaskToServerDeleted(task) {
   axios //axios api post (takes url and object of data)
     .post("http://localhost:3301/api/insertDeleted", {
@@ -38,6 +57,9 @@ function sendTaskToServerDeleted(task) {
 }
 
 
+//delete task from finished and move to todolist
 
-export { sendTaskToServer, getTasksFromServer, closeAddTask, sendTaskToServerDeleted };
+
+
+export { sendTaskToServer, removeTaskFromDeleted, getTasksFromServer, getFinishedTasksFromServer, closeAddTask, sendTaskToServerDeleted };
 

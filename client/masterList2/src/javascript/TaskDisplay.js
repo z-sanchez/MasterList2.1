@@ -181,6 +181,7 @@ class TaskDisplay extends React.Component {
       }
       return data;
     }).then((data) => {
+      console.log(data);
       this.setState({
         data: data,
       });

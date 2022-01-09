@@ -1,8 +1,19 @@
 import React from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import TaskDisplay from "./TaskDisplay";
+import { DateContext } from "../javascript/context";
+import TaskDisplayFinished from "./TaskDisplayFinished";
+
 
 class ScrollBar extends React.Component {
+  static contextType = DateContext;
+
+  renderTaskDisplay = () => {
+    if (this.context.viewMode !== "finished") return (<TaskDisplay />);
+
+    return (<TaskDisplayFinished/>);
+
+  };
 
   render() {
     return (
@@ -20,7 +31,7 @@ class ScrollBar extends React.Component {
           <div {...props} style={{ ...style, overflowX: "hidden", marginBottom: "0" }} />
         }
       >
-        <TaskDisplay />
+        {this.renderTaskDisplay()}
       </Scrollbars>
     );
   }

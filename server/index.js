@@ -25,6 +25,15 @@ app.get("/api/get", (req, res) => {
   });
 });
 
+app.get("/api/getFinished", (req, res) => {
+  //api route to reach api from to get
+  const sqlSelect = "SELECT * FROM deletedtasks";
+  db.query(sqlSelect, (err, results) => {
+    //gets all data from table
+    res.send(results); //sends to api
+  });
+});
+
 app.post("/api/insert", (req, res) => {
   //api route to reach api from
   const task = req.body.task; //grabs body data
@@ -35,6 +44,17 @@ app.post("/api/insert", (req, res) => {
   const sqlInsert = //sql insert
     "INSERT INTO tasktable (task, month, day, year) VALUES (?,?,?,?)";
   db.query(sqlInsert, [task, month, day, year], (err, results) => {
+    console.log(results);
+  });
+});
+
+app.post("/api/remove", (req, res) => {
+  //api route to reach api from
+  const task = req.body.task; //grabs body data
+
+  const sqlDelete = //sql insert
+    "DELETE FROM deletedtasks WHERE task=(?)";
+  db.query(sqlDelete, [task], (err, results) => {
     console.log(results);
   });
 });

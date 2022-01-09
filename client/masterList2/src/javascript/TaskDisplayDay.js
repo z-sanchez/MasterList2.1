@@ -68,7 +68,7 @@ class TaskDisplayDay extends React.Component {
 
   render() {
     // eslint-disable-next-line react/prop-types
-    if (this.context.viewMode === "oneDay") {
+    if (this.context.viewMode === "oneDay" || this.context.viewMode === "finished") {
       return (<div className="taskDisplayDay"
                    id={this.state.date.month + "/" + this.state.date.day + "/" + this.state.date.year}>
         <div className="taskDisplayDay__nameDateContainer">
