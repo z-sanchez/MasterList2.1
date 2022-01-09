@@ -18,33 +18,51 @@ class Aside extends React.Component {
     this.context.toggleViewMode("oneDay");
   };
 
+  toggleFinshed = () => {
+    this.context.toggleViewMode("finished");
+  };
+
+  toggleIndicatorPurple = () => {
+    if (this.context.viewMode === "oneDay") return (<img src={toggledOn} alt={"on"} className={"viewSelector--on"}/>);
+  };
+
+  toggleIndicatorBlue = () => {
+    if (this.context.viewMode === "all") return (<img src={toggledOn} alt={"on"} className={"viewSelector--on"}/>);
+  };
+
+  toggleIndicatorPink = () => {
+    if (this.context.viewMode === "finished") return (<img src={toggledOn} alt={"on"} className={"viewSelector--on"}/>);
+  };
+
   render() {
     return (
       <aside id="aside">
-        <div id="oneViewSelector" className="viewSelector viewSelector--purple" onClick={this.toggleOne}>
+        <div id="viewSelector--purple" className="viewSelector" onClick={this.toggleOne}>
           <p className="viewSelector__name">1 Day</p>
           <img
             src={oneView}
             alt="oneView"
             className="viewSelector__image"
           />
-          <img src={toggledOn} alt="on" className="viewSelector--on" />
+          {this.toggleIndicatorPurple()}
         </div>
-        <div id="oneViewSelector" className="viewSelector viewSelector--blue" onClick={this.toggleAll}>
+        <div id="viewSelector--blue" className="viewSelector" onClick={this.toggleAll}>
           <p className="viewSelector__name">All</p>
           <img
             src={allView}
             alt="oneView"
             className="viewSelector__image"
           />
+          {this.toggleIndicatorBlue()}
         </div>
-        <div id="oneViewSelector" className="viewSelector viewSelector--pink">
+        <div id="viewSelector--pink" className="viewSelector" onClick={this.toggleFinshed}>
           <p className="viewSelector__name">Trash</p>
           <img
             src={trashView}
             alt="oneView"
             className="viewSelector__image"
           />
+          {this.toggleIndicatorPink()}
         </div>
         <Calendar />
       </aside>

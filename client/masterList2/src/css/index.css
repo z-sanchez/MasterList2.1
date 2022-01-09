@@ -120,23 +120,25 @@ body {
   width: auto;
 }
 
-.viewSelector--purple {
+#viewSelector--purple {
   background-color: #9469eb;
 }
 
-.viewSelector--blue {
+#viewSelector--blue {
   background-color: #0099fa;
 }
 
-.viewSelector--pink {
+#viewSelector--pink {
   background-color: #da71f9;
 }
 
 .viewSelector--on {
   /* setting dot to correct position */
+  position: absolute;
   width: 0.5vw;
   align-self: flex-end;
-  margin-right: 2vw;
+  margin-top: 10vh;
+  padding-right: 1.5vw;
 }
 
 /* Calendar */
@@ -401,7 +403,7 @@ option:hover {
   display: flex;
   flex-flow: column;
   height: fit-content;
-  margin: 4vh 0 0 0;
+  padding: 2vh 0 2vh 0;
 }
 
 .taskDisplayDay__nameDateContainer--all {

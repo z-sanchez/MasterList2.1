@@ -209,7 +209,7 @@ class TaskDisplay extends React.Component {
 
 
     dayCodes = dayCodes.slice().sort((a,b) => {
-        return a - b;
+      return a - b;
     });
 
 
@@ -250,7 +250,7 @@ class TaskDisplay extends React.Component {
 
     return days;
   }
-  
+
   updateTasks = (task) => {
     var tasks = this.state.data
 
